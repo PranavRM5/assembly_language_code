@@ -1,0 +1,1835 @@
+ASSEMBLY LANGUAGE SETUP
+
+FOLDER LOCATION :- C:\mahajan
+
+SOFTWARE ADDRESS:- C:\Program Files (x86)\DOSBox-0.74-3
+INPUT DOSBOX
+MOUNT C C:/FOLDERNAME
+C:
+EDIT FILENAME.ASM
+
+OUTPUT:-
+M2 FILENAME;
+L2 FILENAME;
+FILENAME
+FILENAME>FILENAMEO
+
+PROGRAM COA
+
+1.
+;program a single character
+
+dosseg
+
+.model small
+
+.stack 100h 
+
+.data
+
+.code
+
+min proc
+
+mov dl, 'a' 
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp 
+
+end main
+
+2.
+;Program to print a name with characters
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc
+
+mov dl, 'R'
+
+mov ah, 2 
+
+int 21h
+
+mov dl, 'a' 
+
+mov ah, 2
+
+int 21h
+
+mov dl, 'm'
+
+mov ah, 2 
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+3.
+:program to input a character from user and print it
+
+dosseg
+
+.model small 
+
+.stack 100h
+
+.data
+
+.code 
+
+main proc
+
+mov ah, 1
+
+int 21h
+
+mov dl, al
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch 
+
+int 21h 
+
+main endp
+
+end main
+
+4.
+;program to add two numbers
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc
+
+mov bl, 1
+
+mov cl, 2
+
+add bl, cl 
+
+add bl, 48
+
+mov dl, bl 
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+5.
+;program to subtract two numbers
+
+dosseg 
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc 
+
+mov bl, 3
+
+mov cl, 1 
+
+sub bl, cl
+
+add bl, 48
+
+mov dl, bl
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+6.
+;program to input two numbers and add them
+
+dosseg
+
+.model small
+
+.stack 100h 
+
+.data
+
+.code
+
+main proc 
+
+mov ah, 1
+
+int 21h
+
+mov bl, al
+
+mov al, 1 
+
+int 21h
+
+add bl, al 
+
+sub bl, 48
+
+mov dl, bl 
+
+Mov ah, 2
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+7.
+;program to convert capital letter to small letter
+
+dosseg 
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc
+
+mov ah, 1
+
+int 21h
+
+mov dl, al 
+
+add d1, 32
+
+mov ah, 2 
+
+int 21h
+
+mov ah, 4ch 
+
+int 21h
+
+main endp 
+
+end main
+
+8.
+;Program to print two different strings on two different lines
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+msg1 db 'hello$'
+
+msg2 db 'world$'
+
+.code
+
+main proc
+
+mov ax, @data 
+
+mov ds, ax
+
+mov dx, offset msg1
+
+mov ah, 9
+
+int 21h
+
+mov dx, 10 
+
+mov ah, 2
+
+int 21h
+
+mov dx, 13
+
+mov ah, 2
+
+int 21h
+
+mov dx, offset msg2        ;lea dx, msg2
+
+mov ah, 9
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+9.
+;Program to print capital letters from A to Z Using Loop
+
+dosseg
+
+.model small 
+
+.stack 100h
+
+.data 
+
+.code
+
+main proc
+
+mov cx, 26
+
+mov dx, 65
+
+L1:
+
+mov ah, 2
+
+int 21h
+
+inc dx
+
+loop L1
+
+mov ah, 4ch 
+
+int 21h
+
+main endp
+
+end main
+
+10.
+;program to print the input no is equal or not
+
+dosseg
+
+.model small 
+
+.stack 100h
+
+.data
+
+msg1 db 'number is equal$' 
+msg2 db 'number is not equal$'
+
+.code
+
+main proc 
+
+mov ax, @data
+
+mov ds, ax
+
+mov dl, '3' 
+
+mov ah, 1
+
+int 21h
+
+Cmp al, dl 
+
+je L1
+
+L1:
+
+mov dx, offset msg1
+
+mov ah, 2 
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp 
+
+end main
+
+11.
+;Program to print an array using loop
+
+dosseg 
+
+.model small
+
+.stack 100h
+
+.data
+
+array db 'a','b','c'
+
+.code
+
+main proc
+
+mov ax, @data
+
+mov ds,ax
+
+mov si, offset array 
+
+mov cx, 3
+
+L1:
+
+mov dx, [si] 
+
+mov ah,2
+
+int 21h
+
+inc si         ;mov dx, [si+1]
+
+loop L1
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+12.
+;program to input string and print
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data var1 db 100 dup('$')
+
+.code
+
+main proc
+
+mov ax, @data mov ds, ax
+
+mov si, offset var1
+
+11: mov ah, 1
+
+int 21h
+
+cmp al, 13 
+
+je programend
+
+mov [sil,al
+
+inc si
+
+jmp 11
+
+programend:
+
+mov dx, offset var1
+
+mov ah, 9
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp 
+
+end main
+
+13.
+;Program to swap two numbers using push and pop
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data 
+
+.code
+
+main proc
+
+mov ax, '1' 
+
+mov bx, '2'
+
+push ax
+
+push bx
+
+pop ax 
+
+pop bx
+
+mov dx, ax
+
+mov ah, 2
+
+int 21h
+
+mov dx, bx
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+14.
+;Program to reverse a string
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+string db 'RAM'
+
+.code 
+
+main proc
+
+mov ax,@data
+
+mov ds, ax 
+
+mov si, offset string
+
+mov cx, 3
+
+L1: 
+
+mov bx, [si]
+
+push bx
+
+inc si
+
+loop L1
+
+mov cx, 3
+
+L2: 
+
+pop dx
+
+mov ah, 2
+
+int 21h 
+
+loop L2
+
+mov ah, 4ch
+
+int 21h
+
+main endp 
+
+end main
+
+15.
+;Nested loop
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc
+
+mov bx,1
+
+Mov cx, 5
+
+L1:
+
+Push cx
+
+Mov cx, bx
+
+
+L2:
+
+Mov dx,
+
+Mov ah, 2
+
+Int 21h
+
+
+Mov dx, 10
+
+mov ah, 2
+
+Int 21h
+
+Mov dx, 13
+
+Mov ah, 2
+
+Int 21h
+
+
+Loop L2
+
+Inc bx 
+
+POP cx
+
+
+Loop L1
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+16.
+;program of procedure
+
+dosseg
+
+.model small
+
+.stack 100h 
+
+.data
+
+str1 db 'hello$'
+
+str2 db 'how are you$'
+
+str3 db 'good to see you$'
+
+.code
+
+main proc
+
+mov ax, @data 
+
+mov ds, ax
+
+mov dx, offset str1 
+
+mov ah, 9
+
+int 21h
+
+call enterkey
+
+mov dx, offset str2
+
+mov ah, 9
+
+int 21h
+
+call enterkey
+
+mov dx, offset str3
+
+mov ah, 9
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+enterkey proc
+
+mov dx, 10 mov ah, 2
+
+int 21h mov dx, 13
+
+mov ah, 2
+
+int 21h
+
+ret
+
+enterkey endp
+
+end main
+
+17.
+print macro p1 
+
+Mov dx, offset p1
+
+Mov ah, 9
+
+Int 21h
+
+endm
+
+.model small
+
+.stack 100h
+
+.data
+
+Str1 db 'hello$'
+
+Str2 db 'it is a test program$'
+
+.code
+
+Main proc Mov ax, @data
+
+Mov ds, ax
+
+print str1
+
+print str2
+
+For Print
+
+Mov ah, 4ch
+
+Int 21h
+
+Main endp
+
+End main
+
+18.
+;program to divide two numbers
+
+.model small
+
+.stack 100h
+
+.data
+
+q db ? 
+
+r db ?
+
+.code
+
+main proc
+
+mov ax, 26
+
+mov bl, 5
+
+div bl
+
+mov q, al 
+
+mov r, ah
+
+mov dl, q
+
+add dl, 48 
+
+mov ah, 2
+
+int 21h
+
+mov dl, r
+
+add dl, 48
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch 
+
+int 21h
+
+main endp
+
+end main
+
+19.
+;Program to multiply two numbers
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc
+
+mov al, 5
+
+mov bl, 2 
+
+mul bl
+
+AAM
+
+mov ch, ah
+
+mov cl, al
+
+mov dl, ch
+
+A add dl, 48
+
+Lang
+
+mov ah, 2
+
+int 21h mov dl, cl
+
+add dl, 48
+
+mov ah, 2
+
+int 21h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+20.
+;program to draw box
+
+dosseg
+
+.model small
+
+.stack 100h
+
+.data
+
+.code
+
+main proc
+
+mov ah, 6
+
+mov al, 10 
+
+mov bh, 00010000b
+
+mov ch, 0 
+
+mov cl, 0
+
+mov dh, 15 
+
+mov dl, 15
+
+int 10h
+
+mov ah, 4ch
+
+int 21h
+
+main endp
+
+end main
+
+21.
+
+
+
+;Title:- Program using Near Procedure
+
+;Aim :- Write an 8086 Assembly Language Program for Addition of two 8-
+
+bit HEX numbers using NEAR Procedure.
+
+;Name:- PRANAV RAJENDRA MAHAJAN
+
+;Class :- SE IT
+
+;Roll No:- 20
+
+;
+
+
+
+DISPLAY MACRO MSG ;Defining a Macro, to display a string
+
+LEA DX,MSG
+
+MOV AH,09H
+
+INT 21H
+
+ENDM
+
+DATA SEGMENT
+
+MSG1 DB 10,13, "**************************************** $"
+
+MSG2 DB 10,13, "NAME :- PRANAV RAJENDRA MAHAJAN $"
+
+MSG3 DB 10,13, "ROLL NO :-20 $"
+
+MSG4 DB 10,13, "CLASS :- SE IT $ï¿½
+
+MSG5 DB 10,13, "COLLEGE :- SSBT $"
+
+MSG6 DB 10,13, "**************************************** $"
+
+DATA ENDS
+
+CODE SEGMENT
+
+ASSUME CS:CODE ,DS:DATA
+
+MOV AX,DATA ;Store start address of data segment in AX register
+
+MOV DS,AX ;Initializing DS register, i.e. DS register contains
+
+;start address of data segment
+
+DISPLAY MSG1 ;Calling a Macro to display string, and
+
+DISPLAY MSG2 ;passing parameters to a Macro
+
+DISPLAY MSG3
+
+DISPLAY MSG4
+
+DISPLAY MSG5
+
+DISPLAY MSG6
+
+MOV AH,4CH ;Terminate the program and rteurn back to OS
+
+INT 21H
+
+CODE ENDS
+
+END
+
+
+
+
+
+
+OUTPUT :-
+
+
+
+**************************************** 
+
+
+
+NAME :- PRANAV RAJENDRA MAHAJAN
+
+
+
+ROLL NO :- 20
+
+
+
+CLASS :- SE IT 
+
+
+
+COLLEGE :- SSBT 
+
+
+
+**************************************** 
+
+
+22.
+;Title:- Program using Near Procedure
+;Aim :- Write an 8086 Assembly Language Program for Addition of two 8-
+bit HEX numbers using NEAR Procedure.
+;Name:- PRANAV RAJENDRA MAHAJAN
+;Class :- SE IT
+;Roll No:- 20
+;
+
+
+DATA SEGMENT
+NO1 DB 12H
+NO2 DB 35H
+HEX_CHART DB '0123456789ABCDEF'
+STORE_ADDITION DB ?
+H_ATTACH DB 'H'
+MSG DB 'RESULT IS :- $'
+DATA ENDS
+CODE SEGMENT
+ASSUME CS:CODE,DS:DATA
+MOV AX,DATA
+MOV DS,AX ;Initialization of DS register
+LEA DX,MSG
+MOV AH,09H
+INT 21H
+MOV AL,NO1
+ADD AL,NO2 ;Addition of two numbers. Result in AL register
+MOV AH,00H
+ADC AH,00H ;Carry is stored in AH register
+MOV STORE_ADDITION,AL
+MOV AL,AH
+CALL DISP_CHAR ;Call near procedure to display carry
+MOV AL,STORE_ADDITION
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL DISP_CHAR ;Call near procedure to display most
+;significant digit of result
+MOV AL,STORE_ADDITION
+AND AL,0FH
+CALL DISP_CHAR ;Call near procedure to display least
+;significant digit of result
+MOV DL,H_ATTACH ;To display H in result
+MOV AH,02H
+INT 21H
+JMP LAST
+DISP_CHAR PROC NEAR ;To define near procedure for
+;displaying a character
+MOV BX,00H
+MOV BL,AL
+MOV DL,HEX_CHART[BX]
+MOV AH,02H
+INT 21H
+RET
+DISP_CHAR ENDP
+LAST:MOV AH,4CH ;To terminate a program
+INT 21H
+CODE ENDS
+END
+
+
+
+OUTPUT  :- 
+
+********************************************
+RESULT IS :- 047H
+
+********************************************
+
+23.
+
+;Title:- Multiplication Program, using Near Procedure
+;Aim :- Write an 8086 Assembly Language Program for Multiplication of two 8-
+bit HEX numbers using NEAR Procedure.
+;Name:- PRANAV RAJENDRA MAHAJAN
+;Class :- SE IT
+;Roll No:- 20
+;
+
+
+DATA SEGMENT
+NO1 DB 02H
+NO2 DB 03H
+HEX_CHART DB '0123456789ABCDEF'
+LSB_OF_RESULT DB ?
+MSB_OF_RESULT DB ?
+H_ATTACH DB 'H'
+MSG DB 'RESULT IS :- $'
+DATA ENDS
+CODE SEGMENT
+ASSUME CS:CODE,DS:DATA
+MOV AX,DATA
+MOV DS,AX ;Initialization of DS register
+LEA DX,MSG
+MOV AH,09H
+INT 21H
+MOV AL,NO1
+MOV BH,NO2
+MUL BH ; AX = BH * AL
+; AH stores most significand byte and
+; AL stores least significand byte
+MOV MSB_OF_RESULT,AH
+MOV LSB_OF_RESULT,AL
+MOV AL,MSB_OF_RESULT
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL DISP_CHAR ;Call near procedure to display
+;Most Significant Digit of Most Significant byte
+MOV AL,MSB_OF_RESULT
+AND AL,0FH
+CALL DISP_CHAR ;Call near procedure to display
+;Least Significant Digit of Most Significant byte
+
+
+
+OUTPUT PP4 :- 
+
+********************************************
+RESULT IS :- 0006H
+
+********************************************
+
+24.
+
+;Title:- Program using FAR Procedure
+;Aim :- Write an 8086 Assembly Language Program for Addition of two 8-
+bit HEX numbers using FAR Procedure.
+;Name:- PRANAV RAJENDRA MAHAJAN
+;Class :- SE IT
+;Roll No:- 20
+;
+
+
+
+DATA SEGMENT
+NO1 DB 12H
+NO2 DB 35H
+HEX_CHART DB '0123456789ABCDEF'
+STORE_ADDITION DB ?
+H_ATTACH DB 'H'
+MSG DB 'RESULT IS:- $'
+DATA ENDS
+CODE SEGMENT
+ASSUME CS:CODE,DS:DATA
+MOV AX,DATA
+MOV DS,AX ;Initialization of DS register
+LEA DX,MSG
+MOV AH,09H
+INT 21H
+MOV AL,NO1
+ADD AL,NO2 ;Addition of two numbers. Result in AL register
+MOV AH,00H
+ADC AH,00H ;Carry is stored in AH register
+MOV STORE_ADDITION,AL
+MOV AL,AH
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display a carry
+MOV AL,STORE_ADDITION
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display most
+;significand digit of result
+MOV AL,STORE_ADDITION
+AND AL,0FH
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display least
+;significand digit of result
+MOV DL,H_ATTACH ;To display H in result
+MOV AH,02H
+INT 21H
+MOV AH,4CH
+INT 21H ;To terminate a program
+CODE ENDS
+CODE_FAR SEGMENT
+ASSUME CS:CODE_FAR,DS:DATA
+DISP_CHAR PROC FAR ; To define Far procedure in other code
+; segment for displaying a character
+MOV BX,00H
+MOV BL,AL
+MOV DL,HEX_CHART[BX]
+MOV AH,02H
+INT 21H
+RET
+DISP_CHAR ENDP
+CODE_FAR ENDS
+END
+
+
+
+OUTPUT PP5 :- 
+
+********************************************
+RESULT IS :- 047H
+
+********************************************
+
+25.
+;Title:- Multiplication Program, using FAR Procedure
+;Aim :- Write an 8086 Assembly Language Program for Multiplication of two 8-
+bit HEX numbers using FAR Procedure.
+;Name:- PRANAV RAJENDRA MAHAJAN
+;Class :- SE IT
+;Roll No:- 20
+;
+
+
+DATA SEGMENT
+NO1 DB 03H
+NO2 DB 02H
+HEX_CHART DB '0123456789ABCDEF'
+LSB_OF_RESULT DB ?
+MSB_OF_RESULT DB ?
+H_ATTACH DB 'H'
+MSG DB 'RESULT IS :- $'
+DATA ENDS
+CODE SEGMENT
+ASSUME CS:CODE,DS:DATA
+MOV AX,DATA
+MOV DS,AX ;Initialization of DS register
+LEA DX,MSG
+MOV AH,09H
+INT 21H
+MOV AL,NO1
+MOV BH,NO2
+MUL BH ; AX = BH * AL
+; AH stores most significand byte and
+; AL stores least significand byte
+MOV MSB_OF_RESULT,AH
+MOV LSB_OF_RESULT,AL
+MOV AL,MSB_OF_RESULT
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display
+;Most Significant Digit of Most Significant byte
+MOV AL,MSB_OF_RESULT
+AND AL,0FH
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display
+;Least Significant Digit of Most Significant byte
+MOV AL,LSB_OF_RESULT
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display
+;Most Significant Digit of Least Significant byte
+MOV AL,LSB_OF_RESULT
+AND AL,0FH
+CALL FAR PTR DISP_CHAR ;Call Far procedure to display
+CODE ENDS
+CODE_FAR SEGMENT
+ASSUME CS:CODE_FAR,DS:DATA
+DISP_CHAR PROC FAR ;To define a far procedure in other code
+;segment to display a character
+MOV BX,00H
+MOV BL,AL
+MOV DL,HEX_CHART[BX]
+MOV AH,02H
+INT 21H
+RET
+DISP_CHAR ENDP
+CODE_FAR ENDS
+END
+
+
+
+
+OUTPUT PP6 :- 
+
+********************************************
+RESULT IS :- 0006H
+
+********************************************
+
+26.
+;Title:- Factorial of a Number.
+;Aim :- Write an 8086 Assembly Language Program to find out Factorial of a number using Re
+;cursive Procedure
+;Name:- Pranav Rajendra Mahajan
+;Class :- SE IT
+;Roll No:- 20
+;*************************************************************************************************
+
+DATA SEGMENT
+NUMBER                  DW 0004H
+HEX_CHART             DB '0123456789ABCDEF'
+LSB_OF_RESULT       DB ?
+MSB_OF_RESULT     DB ?
+H_ATTACH                DB 'H'
+MSG                          DB 'FACTORIAL IS :- $'
+DATA ENDS
+
+CODE SEGMENT
+ASSUME CS:CODE,DS:DATA
+MOV AX,DATA
+MOV DS,AX              ;Initialization of DS register
+
+LEA DX,MSG
+MOV AH,09H
+INT 21H
+
+MOV AX,NUMBER
+MOV CX,NUMBER
+CALL FACTORIAL       ;Calling a near procedure to calculate factorial
+
+EXIT:MOV MSB_OF_RESULT,AH
+MOV LSB_OF_RESULT,AL
+MOV AL,MSB_OF_RESULT
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL DISP_CHAR ;Calling a Near procedure to display
+                             ;most significand digit of most significand byte
+
+
+MOV AL,MSB_OF_RESULT
+AND AL,0FH
+CALL DISP_CHAR ;Calling a Near procedure to display
+                             ;least significand digit of most significand byte
+
+MOV AL,LSB_OF_RESULT
+AND AL,0F0H
+MOV CL,04H
+ROR AL,CL
+CALL DISP_CHAR   ;Calling a Near procedure to display
+                               ;most significand digit of least significand byte
+
+MOV AL,LSB_OF_RESULT
+AND AL,0FH
+CALL DISP_CHAR   ;Calling a Near procedure to display
+                               ;least significand digit of least significand byte
+
+MOV DL,H_ATTACH ;Display H in result
+MOV AH,02H
+INT 21H
+JMP LAST
+FACTORIAL PROC NEAR ;Defining a near procedure for factorial
+CMP CX,01
+JG N1
+MOV AX,01
+JMP EXIT
+N1:CALL CALCULATION ;Calling other near procedure
+
+RET
+FACTORIAL ENDP
+
+CALCULATION PROC NEAR
+DEC CX
+MUL CX
+CMP CX,01
+JE EXIT
+CALL FACTORIAL ;Indirect recursion
+RET
+CALCULATION ENDP
+
+DISP_CHAR PROC NEAR ;Defining a near procedure to display a character
+MOV BX,00H
+MOV BL,AL
+MOV DL,HEX_CHART[BX]
+MOV AH,02H
+INT 21H
+RET
+DISP_CHAR ENDP
+
+LAST:MOV AH,4CH ;Termination of a program
+INT 21H
+CODE ENDS
+END
+
+
+OUTPUT :-
+************************************
+FACTORIAL IS :- 0018H
+************************************
+
+27.
+;Title:- Program for Password Verification
+;Aim :- Write an 8086 Assembly Language Program for Password Verification.
+;Name:- Pranav Rajendra Mahajan
+;Class :- SE IT
+;Roll No:- 20
+;*********************************************************************
+
+DISPLAY MACRO MSG
+              LEA DX,MSG
+              MOV AH,09H
+              INT 21H
+ENDM
+
+DATA SEGMENT
+           MSG1 DB 10,13,'Enter the Password...:- $'
+           MSG2 DB 10,13,'CORRECT PASSWORD...$'
+           MSG3 DB 10,13,'WRONG PASSWORD!! Please Enter again..$'
+           TEMP DB ?
+            PASSWORD DB 'VIJ'
+DATA ENDS
+
+EXTRA SEGMENT
+      KBDIN DB 3 DUP(0)       ;KBDIN is an array to store user entered passwd
+EXTRA ENDS
+
+CODE SEGMENT
+               ASSUME CS:CODE,DS:DATA,ES:EXTRA
+              
+               MOV AX,DATA
+               MOV DS,AX ;Initialization of DS register
+               MOV AX,EXTRA
+               MOV ES,AX ;Initialization of ES register i.e. ES register will
+                                  ;contain start address of EXTRA segment
+N1: LEA DI,KBDIN
+      MOV CX,03H
+
+DISPLAY MSG1 ;Ask the user to enter the password
+
+NEXT:MOV AH,07H ;Read a character from kbd without echo
+         INT 21H
+         MOV TEMP,AL
+         MOV DL,'*' ;Accept the user entered password and
+         MOV AH,02H ;display * instead of actual password
+         INT 21H
+         MOV AL,TEMP
+         STOS KBDIN ;Store the entered password in KBDIN
+                              ;array in Extra segment
+LOOP NEXT
+
+MOV CX,03H
+LEA SI,PASSWORD
+LEA DI,KBDIN
+
+REP CMPSB ;Comparing passwd with user entered passwd
+JNE ERROR
+
+DISPLAY MSG2 ;Display correct password message
+JMP LAST
+
+ERROR:DISPLAY MSG3 ;Display wrong password message and terminate the
+JMP N1 ;program only if user entered passwd is correct
+LAST:MOV AH,4CH ;Terminating a program
+INT 21H
+CODE ENDS
+END
+
+OUTPUT:- 
+*******************************************
+Enter the Password...:- MMP
+WRONG PASSWORD!! Please Enter again..
+Enter the Password...:- VIJ
+CORRECT PASSWORD...
+
+*******************************************
+
+28.
+;Title:- Program for generating Fibonacci Series
+;Aim :- Write an 8086 Assembly Language Program to generate Fibonacci Series.
+;Name:- Pranav Rajendra Mahajan
+;Class :- SE IT
+;Roll No:- 20
+;*******************************************************************
+
+DISPLAY_ZERO MACRO         ;Define macro to display 0
+               MOV DL,'0'
+               MOV AH,02H
+               INT 21H
+ENDM
+
+DISPLAY_SPACE MACRO         ;Define macro to give space between digits
+               MOV DL,' '
+               MOV AH,02H
+               INT 21H
+ENDM
+
+DATA SEGMENT
+                   NUMBER1         DB 00
+                   NUMBER2         DB 01
+                  CHART                DB '0123456789'
+                  QUOTIENT          DB ?
+                  REMAINDER       DB ?
+                  COUNTER           DW 000AH
+DATA ENDS
+
+CODE SEGMENT
+                 ASSUME CS:CODE,DS:DATA
+
+                 MOV AX,DATA
+                 MOV DS,AX ;Initialization of DS register
+
+                 MOV CX,COUNTER
+                
+                  DISPLAY_ZERO ; Call macro to display 0
+                  DISPLAY_ZERO ; Call macro to display 0
+
+                  DISPLAY_SPACE ; Call macro to give space between digits
+                
+                  DISPLAY_ZERO ; Call macro to display 0
+                  MOV AL,NUMBER2
+                  CALL DISP_CHAR ; Call near procedure to display 1.
+
+N1: MOV AH,00
+       MOV AL,NUMBER1
+       ADD AL,NUMBER2
+       MOV DH,AL
+       MOV BH,10
+       DIV BH ; AX divided by BH. Quotient in AL
+                     ; and Remainder in AH
+MOV QUOTIENT,AL
+MOV REMAINDER,AH
+
+DISPLAY_SPACE ; Call macro to give space between digits
+
+MOV AL,QUOTIENT
+CALL DISP_CHAR ; Call near procedure to display quotient
+
+MOV AL,REMAINDER
+CALL DISP_CHAR ; Call near procedure to display remainder
+
+MOV AL,NUMBER2
+MOV NUMBER1,AL
+MOV NUMBER2,DH
+LOOP N1
+
+JMP LAST
+
+DISP_CHAR PROC NEAR ; Defining near procedure to display a chracter
+MOV BX,00H
+MOV BL,AL
+MOV DL,CHART[BX]
+MOV AH,02H
+INT 21H
+RET
+DISP_CHAR ENDP
+
+LAST:MOV AH,4CH ; To terminate a program
+INT 21H
+CODE ENDS
+END
+
+
+OUTPUT:-
+**********************************
+00 01 01 02 03 05 08 13 21 34 55 89
+**********************************
+
+29.
+
+;Title:- BCD to HEX Conversion
+;Aim:- Write an 8086 Assembly Langauage program
+       ;for 2-digit BCD to HEX convertion.
+;Name:- Pranav Rajendra Mahajan
+;Class:- SE IT
+;Roll no:- 20
+;
+
+
+DISPLAY MACRO MSG
+        LEA DX,MSG
+        MOV AH,09H
+        INT 21H
+ENDM
+
+DATA SEGMENT
+        BUFFER         DB 02 DUP(0)
+        MSG1           DB 13,10,"ENTER THE NUMBER........:- $"
+        MSG2           DB 13,10,"INVALID ENTRY...$"
+        MSG3           DB 13,10,"Equivalent HEX number is:- $"
+        HEX_CHART      DB '0123456789ABCDEF'
+        STORE_RESULT   DB ?
+        H_ATTACH       DB 'H'
+DATA ENDS
+
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+
+        MOV AX,DATA
+        MOV DS,AX
+
+        DISPLAY MSG1
+                
+        MOV BX,00
+        CALL KBD_INPUT     ;To read most significant digit of input from kbd 
+        CALL KBD_INPUT     ;To read least significant digit of input from kbd 
+
+        MOV BX,00
+        MOV AL,BUFFER[BX]
+        MOV DH,BUFFER[BX+1]
+       
+        MOV BH,0AH
+        MUL BH                 ; AX = BH * AL
+        ADD AL,DH              
+        MOV STORE_RESULT,AL
+
+        DISPLAY MSG3
+
+        MOV AL,STORE_RESULT
+        AND AL,0F0H
+        MOV CL,04
+        ROR AL,CL
+        CALL DISP_CHAR
+        
+        MOV AL,STORE_RESULT
+        AND AL,0FH
+        CALL DISP_CHAR
+
+        MOV DL,H_ATTACH
+        MOV AH,02H
+        INT 21H
+        JMP LAST
+
+      KBD_INPUT PROC NEAR        ; Defining near procedure to read input from
+                                 ; kbd for valid range (0 to 9)
+         MOV AH,01H
+         INT 21H
+         CMP AL,'0'
+         JB ERROR
+         CMP AL,'9'
+         JA ERROR
+         AND AL,0FH
+         MOV BUFFER[BX],AL
+         INC BX
+         RET
+         ERROR:DISPLAY MSG2
+         JMP LAST
+      KBD_INPUT ENDP
+
+      DISP_CHAR PROC NEAR        ;Defining near procedure to display a charcater
+         MOV BX,00H
+         MOV BL,AL
+         MOV DL,HEX_CHART[BX]
+         MOV AH,02H
+         INT 21H
+         RET
+      DISP_CHAR ENDP
+
+      LAST:MOV AH,4CH            ;To treminate a program
+      INT 21H
+CODE ENDS
+END
+
+OUTPUT:-
+       ENTER THE NUMBER .......:- 13
+       Equivalent HEX number is:- 0DH
+
+       
+       ENTER THE NUMBER .......:- 10
+       Equivalent HEX number is:- 0AH
+******************************************
+
+30.       
+
+
+;Title:- Program for BCD Addition
+;Aim:- Write an 8086 Assembly Langauage program
+      ; for 2-digit BCD Addition.
+;Name:- Pranav Rajendra Mahajan
+;Class:- SE IT
+;Roll no:- 20
+;
+
+
+;JOURNAL PROGRAM
+
+;BCD Addition : To perform addition of two 8-bit BCD numbers.
+
+
+DISPLAY MACRO MSG     
+    LEA DX,MSG
+    MOV AH,09H
+    INT 21H
+ENDM
+
+DATA SEGMENT
+    BUFFER        DB 04 DUP(0)
+    MSG1          DB 10,13,"Enter first number :-  $"
+    MSG2          DB 10,13,"Enter second number:-  $"
+    MSG3          DB 10,13,"Addition is........:- $"
+    MSG4          DB 10,13,"Invalid input.......$"
+    CHART         DB '0123456789'
+    STORE_RESULT  DB ?
+    TEMP1         DB ?
+    TEMP2         DB ?
+DATA ENDS
+
+CODE SEGMENT
+    ASSUME CS:CODE,DS:DATA
+    MOV AX,DATA
+    MOV DS,AX
+
+    DISPLAY MSG1
+    MOV BX,00H
+    CALL KBD_INPUT      ;To read most significant digit of first input number
+    CALL KBD_INPUT      ;To read least significant digit of first input number
+
+    DISPLAY MSG2
+    CALL KBD_INPUT      ;To read most significant digit of second input number
+    CALL KBD_INPUT      ;To read least significant digit of second input number
+
+    MOV BX,00           ;Preparing first input
+    MOV AL,BUFFER[BX]
+    MOV CL,04
+    ROR AL,CL
+    MOV TEMP1,AL
+
+    MOV DH,BUFFER[BX+1]
+    ADD DH,TEMP1
+    
+    MOV AL,BUFFER[BX+2]   ;Preparing second input
+    MOV CL,04
+    ROR AL,CL
+    MOV TEMP2,AL
+
+    MOV AL,BUFFER[BX+3]
+    ADD AL,TEMP2
+
+    ADD AL,DH             ;Add two BCD inputs
+    
+    DAA                   ;Decimal Adjustment after Addition
+
+    MOV STORE_RESULT,AL
+    MOV CH,00H
+    ADC CH,00H            ;Add carry 
+
+    DISPLAY MSG3
+
+    MOV AL,CH
+    CALL DISP_CHAR        ;Call near procedure to display a carry
+
+    MOV AL,STORE_RESULT
+    MOV CL,04H
+    AND AL,0F0H
+    ROR AL,CL
+    CALL DISP_CHAR        ;Call near procedure to display M.S. digit of result
+
+    MOV AL,STORE_RESULT
+    AND AL,0FH
+    CALL DISP_CHAR        ;Call near procedure to display L.S. digit of result
+
+    JMP LAST
+
+  KBD_INPUT PROC NEAR     ;Defining near procedure to read input from kbd060
+     MOV AH,01H           ;for valid range (0 to 9)
+     INT 21H
+     CMP AL,'0'
+     JB ERROR
+     CMP AL,'9'
+     JA ERROR
+     AND AL,0FH
+     MOV BUFFER[BX],AL
+     INC BX
+     RET
+     ERROR:DISPLAY MSG4
+     JMP LAST
+  KBD_INPUT ENDP
+
+  DISP_CHAR PROC NEAR      ;Defining near procedure to display a character
+     MOV BX,00
+     MOV BL,AL
+     MOV DL,CHART[BX]
+     MOV AH,02H
+     INT 21H
+     RET
+  DISP_CHAR ENDP
+
+  LAST:MOV AH,4CH          ;To terminate a program
+       INT 21H
+CODE ENDS
+END
+
+
+OUTPUT:-
+
+        Enter first number:-  40
+        Enter second number:- 20
+        Addition is.........:-060
+******************************************  
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

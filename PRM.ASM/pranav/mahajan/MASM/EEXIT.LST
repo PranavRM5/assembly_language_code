@@ -1,0 +1,122 @@
+ IBM Personal Computer MACRO Assembler   Version 2.00  	Page	1-1
+	 	 	 	 	 	 	 	07-05-<2    
+
+
+1	 	 	 	 	
+2	 0000	 	 	 	DATA SEGMENT
+3	 0000  03	 	 	        NO1                 DB 03H
+4	 0001  05	 	 	        NO2                 DB 05H
+5	 0002  30 31 32 33 34 35	        HEX_CHART           DB '0123456
+	 	 	 	789ABCDEF'
+6	       36 37 38 39 41 42	
+7	       43 44 45 46	 	
+8	 0012  ??	 	 	        LSB_OF_RESULT       DB ?
+9	 0013  ??	 	 	        MSB_OF_RESULT       DB ?
+10	 0014  48	 	 	        H_ATTACH            DB 'H'
+11	 0015  52 45 53 55 4C 54	        MSG                 DB 'RESULT 
+	 	 	 	IS :- $'
+12	       20 49 53 20 3A 2D	
+13	       20 24	 	 	
+14	 0023	 	 	 	DATA ENDS
+15	 	 	 	 	
+16	 0000	 	 	 	CODE SEGMENT
+17	 	 	 	 	        ASSUME CS:CODE,DS:DATA
+18	 	 	 	 	
+19	 0000  B8 ---- R	 	        MOV AX,DATA
+20	 0003  8E D8	 	 	        MOV DS,AX          
+21	 	 	 	 	
+22	 0005  8D 16 0015 R	 	        LEA DX,MSG
+23	 0009  B4 09	 	 	        MOV AH,09H
+24	 000B  CD 21	 	 	        INT 21H
+25	 	 	 	 	
+26	 000D  A0 0000 R	 	        MOV AL,NO1
+27	 0010  8A 3E 0001 R	 	        MOV BH,NO2
+28	 0014  F6 E7	 	 	        MUL BH             
+29	 	 	 	 	
+30	 0016  88 26 0013 R	 	        MOV MSB_OF_RESULT,AH
+31	 001A  A2 0012 R	 	        MOV LSB_OF_RESULT,AL
+32	 	 	 	 	
+33	 001D  A0 0013 R	 	        MOV AL,MSB_OF_RESULT
+34	 0020  24 F0	 	 	        AND AL,0F0H
+35	 0022  B1 04	 	 	        MOV CL,04H
+36	 0024  D2 C8	 	 	        ROR AL,CL
+37	 0026  9A 0000 ---- R	 	        CALL FAR PTR DISP_CHAR   
+38	 	 	 	 	                                 
+39	 	 	 	 	
+40	 002B  A0 0013 R	 	        MOV AL,MSB_OF_RESULT
+41	 002E  24 0F	 	 	        AND AL,0FH
+42	 0030  9A 0000 ---- R	 	        CALL FAR PTR DISP_CHAR   
+43	 	 	 	 	                                 
+44	 	 	 	 	
+45	 0035  A0 0012 R	 	        MOV AL,LSB_OF_RESULT
+46	 0038  24 F0	 	 	        AND AL,0F0H
+47	 003A  B1 04	 	 	        MOV CL,04H
+48	 003C  D2 C8	 	 	        ROR AL,CL
+49	 003E  9A 0000 ---- R	 	        CALL FAR PTR DISP_CHAR    
+50	 	 	 	 	                               
+51	 	 	 	 	
+52	 0043  A0 0012 R	 	        MOV AL,LSB_OF_RESULT
+ IBM Personal Computer MACRO Assembler   Version 2.00  	Page	1-2
+	 	 	 	 	 	 	 	07-05-<2    
+
+
+53	 0046  24 0F	 	 	        AND AL,0FH
+54	 0048  9A 0000 ---- R	 	        CALL FAR PTR DISP_CHAR    
+55	 	 	 	 	                                
+56	 	 	 	 	
+57	 004D  8A 16 0014 R	 	        MOV DL,H_ATTACH           
+58	 0051  B4 02	 	 	        MOV AH,02H
+59	 0053  CD 21	 	 	        INT 21H
+60	 	 	 	 	
+61	 0055  B4 4C	 	 	        MOV AH,4CH               
+62	 0057  CD 21	 	 	        INT 21H
+63	 0059	 	 	 	CODE ENDS
+64	 	 	 	 	
+65	 0000	 	 	 	CODE_FAR SEGMENT                       
+	 	 	 	                        
+66	 	 	 	 	        ASSUME CS:CODE_FAR,DS:DATA
+67	 	 	 	 	
+68	 0000	 	 	 	        DISP_CHAR PROC FAR     
+69	 	 	 	 	                               
+70	 0000  BB 0000	 	 	           MOV BX,00H
+71	 0003  8A D8	 	 	           MOV BL,AL
+72	 0005  8A 97 0002 R	 	           MOV DL,HEX_CHART[BX]
+73	 0009  B4 02	 	 	           MOV AH,02H
+74	 000B  CD 21	 	 	           INT 21H
+75	 000D  CB	 	 	           RET
+76	 000E	 	 	 	        DISP_CHAR ENDP
+77	 000E	 	 	 	CODE_FAR ENDS
+78	 	 	 	 	END
+
+ IBM Personal Computer MACRO Assembler   Version 2.00  	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	 	07-05-<2    
+
+
+Segments and Groups:
+
+	 	N a m e	 	 	Size	Align	Combine	Class
+
+CODE . . . . . . . . . . . . . .	0059	PARA  	NONE	
+CODE_FAR . . . . . . . . . . . .	000E	PARA  	NONE	
+DATA . . . . . . . . . . . . . .	0023	PARA  	NONE	
+
+Symbols:            
+
+	 	N a m e	 	 	Type	Value	Attr         
+
+DISP_CHAR. . . . . . . . . . . .	F PROC	0000	CODE_FAR	Length 
+	 	 	 	=000E
+HEX_CHART. . . . . . . . . . . .	L BYTE 	0002	DATA
+H_ATTACH . . . . . . . . . . . .	L BYTE 	0014	DATA
+LSB_OF_RESULT. . . . . . . . . .	L BYTE 	0012	DATA
+MSB_OF_RESULT. . . . . . . . . .	L BYTE 	0013	DATA
+MSG. . . . . . . . . . . . . . .	L BYTE 	0015	DATA
+NO1. . . . . . . . . . . . . . .	L BYTE 	0000	DATA
+NO2. . . . . . . . . . . . . . .	L BYTE 	0001	DATA
+
+50106 Bytes free   
+
+Warning Severe
+Errors	Errors 
+0	0

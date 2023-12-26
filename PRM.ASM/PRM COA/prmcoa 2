@@ -1,0 +1,105 @@
+
+
+
+;Title:- Program using Near Procedure
+
+;Aim :- Write an 8086 Assembly Language Program for Addition of two 8-
+
+bit HEX numbers using NEAR Procedure.
+
+;Name:- PRANAV RAJENDRA MAHAJAN
+
+;Class :- SE IT
+
+;Roll No:- 20
+
+;
+
+
+
+DISPLAY MACRO MSG ;Defining a Macro, to display a string
+
+LEA DX,MSG
+
+MOV AH,09H
+
+INT 21H
+
+ENDM
+
+DATA SEGMENT
+
+MSG1 DB 10,13, "**************************************** $"
+
+MSG2 DB 10,13, "NAME :- PRANAV RAJENDRA MAHAJAN $"
+
+MSG3 DB 10,13, "ROLL NO :-20 $"
+
+MSG4 DB 10,13, "CLASS :- SE IT $�
+
+MSG5 DB 10,13, "COLLEGE :- SSBT $"
+
+MSG6 DB 10,13, "**************************************** $"
+
+DATA ENDS
+
+CODE SEGMENT
+
+ASSUME CS:CODE ,DS:DATA
+
+MOV AX,DATA ;Store start address of data segment in AX register
+
+MOV DS,AX ;Initializing DS register, i.e. DS register contains
+
+;start address of data segment
+
+DISPLAY MSG1 ;Calling a Macro to display string, and
+
+DISPLAY MSG2 ;passing parameters to a Macro
+
+DISPLAY MSG3
+
+DISPLAY MSG4
+
+DISPLAY MSG5
+
+DISPLAY MSG6
+
+MOV AH,4CH ;Terminate the program and rteurn back to OS
+
+INT 21H
+
+CODE ENDS
+
+END
+
+
+
+
+
+
+OUTPUT :-
+
+
+
+**************************************** 
+
+
+
+NAME :- PRANAV RAJENDRA MAHAJAN
+
+
+
+ROLL NO :- 20
+
+
+
+CLASS :- SE IT 
+
+
+
+COLLEGE :- SSBT 
+
+
+
+**************************************** 

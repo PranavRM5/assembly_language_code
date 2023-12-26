@@ -1,0 +1,249 @@
+#Refer:- www.mysqltutorial.org
+
+select version();
+select current_date();
+select current_timestamp();
+
+# mysql as a simple calculator.Also run in shell.
+select 4+1+5, 5*4*2;
+
+show databases;
+#to create a database
+create database I2_DB1;
+show databases;
+use I2_DB1;
+
+select database();
+show tables;
+
+#Create table instructor
+create table instructor (ID int,
+                         name varchar(25) not null,
+                         dept_name varchar(15) not null,
+                         salary numeric (10,3),
+                         primary key (ID));
+      
+show tables;
+#To describe the table
+desc instructor;
+describe instructor;
+drop table instructor;
+#To add data in the table
+
+insert into instructor values (100,'George','Computer','110000');
+select * from instructor;
+select ID from instructor;
+select ID, name from instructor;
+
+#To add remaining data
+insert into instructor values (101,'Krishna','Computer','95000');
+insert into instructor values (102,'Uday','IT','105000');
+insert into instructor values (103,'Swapnil','ETC','112000');
+select * from instructor;
+
+#Other way
+insert into instructor (ID,name,dept_name,salary)
+                             values(104,'Soumitra','Mechanical','115000'),
+                             (105,'Manas','ETC','98000'),
+                             (106,'Pawan','Electrical','106000'),
+                             (107,'Navin','Mechanical','101000'),
+                             (108,'Devendra','ETC','97000'),
+                             (109,'Parth','Electrical','103000'),
+                             (110,'Nilesh','IT','70000');
+select * from instructor;
+insert into instructor values (110,'NAYAN','IT','17000');
+insert into instructor values (NULL,'Narayan','IT','17000');
+insert into instructor values (111,'Nilofer','IT','700000000000000');
+
+#To apply unique constraint
+CREATE TABLE student(SrNO int AUTO_INCREMENT UNIQUE,
+                     Student_ID int PRIMARY KEY,
+                     Name varchar(30) NOT NULL,
+                     Address varchar(50));
+show tables;
+desc student;
+insert into student values (1,100,'Virat','Delhi');
+select * from student;
+insert into student values (NULL,101,'Rohit', 'Mumbai');
+select * from student;
+insert into student values (NULL,102,'Dhoni','Ranchi');
+select * from student;
+select LAST_INSERT_ID();
+
+insert into student values(NULL,103,'Dhoni','Ranchi');
+insert into student values(NULL,103,NULL,'Ranchi');
+
+#to delete records
+delete from student;
+drop table student;
+
+#delete specific record
+delete from student where Student_ID=100;
+select * from student;
+delete from student where Name='Dhoni';
+select * from student;
+desc student;
+
+#alter table:- add a column
+alter table student add Mobile_NO varchar(10);
+desc student;
+
+#alter table:- modify a column
+alter table student modify Address varchar(60)NOT NULL;
+desc student;
+
+#alter table:-Rename a column
+alter table student change column Address Full_Address varchar(100)NOT NULL;
+desc student;
+
+#deleting specific attribute from a table
+alter table student drop Mobile_NO;
+desc student;
+
+#rename a table
+rename table student to TE_student;
+desc TE_student;
+rename table TE_student to student;
+desc student;
+
+#select...from...where
+select dept_name from instructor;
+select distinct dept_name from instructor;
+select all dept_name from instructor;
+
+#show id,name,dept_name of all instructor with salary increase by one thousand
+select ID,name,dept_name,salary+1000 from instructor;
+select * from instructor;
+
+#find the name of all the instructor for ETC department
+select name from instructor where dept_name='ETC';
+
+#find names of all instructor in ETC department having salary more than 100000
+select name from instructor where dept_name='ETC' and salary>100000;
+
+#find names of all instructor in the computer department  having salary greater than or equal to 95000
+select name from instructor where dept_name='Computer' and salary>=95000;
+
+#find the names of all the instructor who either belongs to mechanical department or having salary greater than 102000
+select name from instructor where dept_name='Mechanical' or salary> 102000; 
+
+#find the name of all instructor where salary is not equal to zero
+select name from instructor where salary<>0;    
+
+#Create table department
+create table department (dept_name varchar(15),
+                         building varchar(15) Not Null,
+                         budget numeric(10,2),
+                         primary key(dept_name));
+                         
+show tables;
+#To describe the table
+desc department;
+describe department;
+drop table department;
+
+#to add data in the table
+insert into department values('Computer','Building No. 1','10000000');				
+insert into department values ('IT','Building No. 2','500000');
+insert into department values ('ETC','Building No. 3','800000');
+insert into department values ('Mechanical','Building No. 4','900000');
+insert into department values ('Electrical','Building No. 5','600000');
+select * from department;
+
+#Retrieve the name of all  instructors,with their department names and department building...
+select name,instructor.dept_name,building from instructor,department
+where instructor.dept_name=department.dept_name;   #Euqi join
+
+#create a table instructor_r
+create table instructor_r (ID int,
+                         name varchar(25) not null,
+                         dept_name varchar(15) not null,
+                         salary numeric (10,3),
+                         primary key (ID));
+show tables;   
+
+#To describe the table
+desc instructor_r;
+describe instructor_r;
+drop table instructor_r;
+#To add data in the table
+
+insert into instructor_r values (100,'George','Computer','110000');
+insert into instructor_r values (101,'Krishna','Computer','95000');
+insert into instructor_r values (102,'Uday','IT','105000'); 
+select * from instructor_r;
+
+#to create a table deprtment_r
+create table department_r (dept_name varchar(15),
+                         building varchar(15) Not Null,
+                         budget numeric(10,2),
+                         primary key(dept_name));
+                         
+show tables;
+#To describe the table
+desc department_r;
+describe department_r;
+drop table department_r;
+
+#to add data in the table
+insert into department_r values('Computer','Building No. 1','10000000');				
+insert into department_r values ('IT','Building No. 2','500000');
+insert into department_r values ('ETC','Building No. 3','800000');
+select * from department_r;
+
+#Cartesian product of reduced form
+select * from instructor_r,department_r;
+#another method
+select * from instructor_r cross join department_r;
+
+#cartesian product of original table
+select * from instructor,department;
+select * from instructor cross join department;
+
+#retrieve the names of all instructors along with their salary and department building...
+select name,salary,building from instructor_r,department_r where instructor_r.dept_name=department_r.dept_name;  #equi join
+#retrieve the names of all instructors along with their salary and department building...for original table
+select name,salary,building from instructor,department where instructor.dept_name=department.dept_name;
+
+#Equi join and Natural join
+select * from instructor_r,department_r;  #cartesian product of reduced table
+select * from instructor_r,department_r where instructor_r.dept_name=department_r.dept_name; #equi join
+
+#Natural join
+select * from instructor_r natural join department_r;   #natural join
+
+#to rename attribute using as clause
+select dept_name from department_r;
+select dept_name as dname from department_r;
+
+select dept_name,building,budget from department_r;
+select dept_name as dname,building,budget from department_r;
+select dept_name as dname, building as dbuilding, budget as dbudget from department_r;
+
+select name,instructor_r.dept_name,building from instructor_r,department_r where instructor_r.dept_name=department_r.dept_name;  #Equi join
+
+select name,I.dept_name,building from instructor_r as I,department_r as D where I.dept_name=D.dept_name;
+
+select name,I.dept_name,building from instructor_r I,department_r D where I.dept_name=D.dept_name;  #removed as,though it will run 
+
+#string operation -pattern matching (using like operation)
+
+
+
+
+
+
+
+
+
+      
+      
+      
+	
+
+
+
+
+
+
+
